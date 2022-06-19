@@ -1,34 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Porsche-NFT
 
-## Getting Started
+Highlight your **latest** two way market stream with Porsche model.
 
-First, run the development server:
+> Disclaimer: the 911 model is copied from [react-three](https://docs.pmnd.rs/react-three-fiber/getting-started/examples) example.
+
+# Getting Started
 
 ```bash
-npm run dev
-# or
+# install dependencies
+yarn
+# setup environment variables
+cp .env.example .env.local
+# run in development mode
 yarn dev
+# run in production mode
+yarn build
+```
+# Usage
+> Currently only support on `Polygon Mainnet`.
+
+0. wrap some `USDC` to `USDCx` on [SuperFluid Dashboard](https://app.superfluid.finance/):
+
+![wrap operation](https://ik.imagekit.io/1winv85cn8g/Porsche/wrap_yPbJhrDTa.png)
+
+1. start a `USDCx > RIC` market on [Ricochet Exchange](https://staging.ricochet.exchange/):
+
+![start a stream](https://ik.imagekit.io/1winv85cn8g/Porsche/stream_wKUwfwuRK.png)
+
+> if you can not find the feature above, try this beta app: [Ricochet Trade History Beta Page](https://ricochet-frontend-git-fork-zhyd1997-feat-trade-history-mikeghen.vercel.app/).
+
+2. connect your wallet with this app:
+
+![mobile](https://ik.imagekit.io/1winv85cn8g/Porsche/mobile_ptfAli28y.png)
+
+![web](https://ik.imagekit.io/1winv85cn8g/Porsche/web_zFaBAxYjv.png)
+
+3. you can also setup your own two way market contract if you have some Solidity experiences(optional):
+
+- use this `stream-in-distribute-out` template: [Superfluid official example](https://github.com/superfluid-finance/protocol-monorepo/tree/dev/examples/stream-in-distribute-out).
+- and then replace `./constants/exchangeAddress.ts` with your own tokens:
+
+```js
+export const exchangeAddress = {
+  // stream-in-token
+  input: {
+    id: '0xcaa7349cea390f89641fe306d93591f87595dc1f',
+    symbol: 'USDCx',
+  },
+  // contract address
+  exchange: {
+    id: '0x86c2b55bf5d3e9dac2747389b38d41c6b1f34179',
+  },
+  // distribute-out-token
+  output: {
+    id: '0x263026e7e53dbfdce5ae55ade22493f828922965',
+    symbol: 'RIC',
+  },
+};
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
