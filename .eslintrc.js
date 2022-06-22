@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = {
-  "extends": ["next", "prettier", "plugin:storybook/recommended"]
+  extends: ["next", "prettier", "plugin:storybook/recommended"],
 };
