@@ -91,7 +91,6 @@ export const PorscheModel = () => {
           <sphereGeometry args={[1, 64, 64]} />
           <LayerMaterial side={THREE.BackSide}>
             <Base color="#444" alpha={1} mode="normal" />
-            {/* @ts-ignore */}
             <Depth
               colorA="blue"
               colorB="black"
@@ -99,6 +98,7 @@ export const PorscheModel = () => {
               mode="normal"
               near={0}
               far={300}
+              // @ts-ignore
               origin={[100, 100, 100]}
             />
           </LayerMaterial>
@@ -114,8 +114,8 @@ export const PorscheModel = () => {
 function Porsche(props: any) {
   const { scene, nodes, materials } = useGLTF("/911-transformed.glb");
   useMemo(() => {
-    // @ts-ignore
     Object.values(nodes).forEach(
+      // @ts-ignore
       (node) => node.isMesh && (node.receiveShadow = node.castShadow = true)
     );
     // @ts-ignore
