@@ -2,7 +2,7 @@ import React from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { LiveEnvMaps } from "@/components/LiveEnvMaps";
+import { PorscheModel } from "@/components/PorscheModel";
 
 export default {
   /* 👇 The title prop is optional.
@@ -10,12 +10,12 @@ export default {
    * to learn how to generate automatic titles
    */
   title: "Example/Porsche_Model",
-  component: LiveEnvMaps,
-} as ComponentMeta<typeof LiveEnvMaps>;
+  component: PorscheModel,
+} as ComponentMeta<typeof PorscheModel>;
 
 //👇 We create a “template” of how args map to rendering
-const Template: ComponentStory<typeof LiveEnvMaps> = (args: any) => (
-  <LiveEnvMaps {...args} />
+const Template: ComponentStory<typeof PorscheModel> = (args: any) => (
+  <PorscheModel {...args} />
 );
 
 export const Primary = Template.bind({});
