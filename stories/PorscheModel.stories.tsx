@@ -9,7 +9,7 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: "Example/Porsche_Model",
+  title: "Components/Porsche_Model",
   component: PorscheModel,
 } as ComponentMeta<typeof PorscheModel>;
 

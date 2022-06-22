@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from '../styles/LoadingSpinner.module.css';
+import React from "react";
+import styles from "@/styles/LoadingSpinner.module.css";
 
 /**
  * @see https://cssloaders.github.io/
