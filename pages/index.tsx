@@ -15,6 +15,7 @@ import { infuraProvider } from "wagmi/providers/infura";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { Account } from "../components/Account";
 import { PorscheModel } from "../components/PorscheModel";
+import { Suspense } from "react";
 
 const client = new ApolloClient({
   uri: "https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-matic",
@@ -75,7 +76,9 @@ const Home: NextPage = () => {
               </div>
               <Account />
             </main>
-            <PorscheModel />
+            <Suspense fallback={null}>
+              <PorscheModel />
+            </Suspense>
 
             <footer className={styles.footer}>
               <div>

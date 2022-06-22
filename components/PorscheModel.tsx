@@ -9,7 +9,20 @@ import {
   BakeShadows,
   ContactShadows,
 } from "@react-three/drei";
-import { LayerMaterial, Base, Depth } from "lamina";
+import type { GLTF as GLTFThree } from "three/examples/jsm/loaders/GLTFLoader";
+import { LayerMaterial, Color, Depth } from "lamina";
+
+/**
+ * Fix "Property 'nodes' does not exist on type 'GLTF'.":
+ *
+ * @see https://spectrum.chat/react-three-fiber/general/gltfloader-and-typescript~e6d52e5b-eef3-45a7-893d-4c873aa1eea7?m=MTYyNDQ2MDUzNDc4Ng==
+ */
+declare module "three-stdlib" {
+  export interface GLTF extends GLTFThree {
+    nodes: Record<string, THREE.Mesh>;
+    materials: Record<string, THREE.Material>;
+  }
+}
 
 /*
  * 911.glb
@@ -90,7 +103,7 @@ export const PorscheModel = () => {
         <mesh scale={100}>
           <sphereGeometry args={[1, 64, 64]} />
           <LayerMaterial side={THREE.BackSide}>
-            <Base color="#444" alpha={1} mode="normal" />
+            <Color color="#444" alpha={1} mode="normal" />
             <Depth
               colorA="blue"
               colorB="black"
@@ -98,7 +111,6 @@ export const PorscheModel = () => {
               mode="normal"
               near={0}
               far={300}
-              // @ts-ignore
               origin={[100, 100, 100]}
             />
           </LayerMaterial>
@@ -115,7 +127,6 @@ function Porsche(props: any) {
   const { scene, nodes, materials } = useGLTF("/911-transformed.glb");
   useMemo(() => {
     Object.values(nodes).forEach(
-      // @ts-ignore
       (node) => node.isMesh && (node.receiveShadow = node.castShadow = true)
     );
     // @ts-ignore
@@ -161,7 +172,6 @@ function CameraRig({ v = new THREE.Vector3() }) {
 
 function MovingSpots({ positions = [2, 0, 2, 0, 2, 0, 2, 0] }) {
   const group = useRef<any | null>(null);
-  // @ts-ignore
   useFrame(
     (state, delta) =>
       (group.current.position.z += delta * 15) > 60 &&
