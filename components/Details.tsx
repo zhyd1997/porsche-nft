@@ -74,7 +74,12 @@ export const Details: FC<DetailsProps> = ({ account, activeChain }) => {
   ) {
     return (
       <div className={styles.details} style={{ display: "block" }}>
-        Start your 1st <b>USDC&nbsp;&gt;&gt;&nbsp;RIC</b> market stream at{" "}
+        Start your 1st{" "}
+        <b>
+          {exchangeAddress.input.symbol}&nbsp;&gt;&gt;&nbsp;
+          {exchangeAddress.output.symbol}
+        </b>{" "}
+        market stream at{" "}
         <a
           href="https://staging.ricochet.exchange/"
           target={"_blank"}
