@@ -1,14 +1,17 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Framework } from '@superfluid-finance/sdk-core';
-import { ethers } from 'ethers';
-import Web3 from 'web3';
-import { calculateReceivedSoFar } from '../utils/calculateReceivedSoFar';
-import { LoadingSpinner } from './LoadingSpinner';
-import { exchangeAddress } from '../constant/exchangeAddress';
-import { Balance } from './Balance';
+import React, { FC, useEffect, useState } from "react";
+import { Framework } from "@superfluid-finance/sdk-core";
+import { ethers } from "ethers";
+import Web3 from "web3";
+import { calculateReceivedSoFar } from "../utils/calculateReceivedSoFar";
+import { LoadingSpinner } from "./LoadingSpinner";
+import { exchangeAddress } from "../constant/exchangeAddress";
+import { Balance } from "./Balance";
 
 const chainId = 137;
-const provider = new ethers.providers.InfuraProvider(chainId, process.env.NEXT_PUBLIC_INFURA_ID);
+const provider = new ethers.providers.InfuraProvider(
+  chainId,
+  process.env.NEXT_PUBLIC_INFURA_ID
+);
 
 type DistanceProps = {
   distribution: any;
@@ -16,7 +19,7 @@ type DistanceProps = {
 };
 
 export const Distance: FC<DistanceProps> = ({ distribution, account }) => {
-  const [distance, setDistance] = useState<string>('');
+  const [distance, setDistance] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<any | null>(null);
 
@@ -30,8 +33,12 @@ export const Distance: FC<DistanceProps> = ({ distribution, account }) => {
         provider,
       });
 
-      const superToken = Web3.utils.toChecksumAddress(exchangeAddress.output.id);
-      const publisher = Web3.utils.toChecksumAddress(exchangeAddress.exchange.id);
+      const superToken = Web3.utils.toChecksumAddress(
+        exchangeAddress.output.id
+      );
+      const publisher = Web3.utils.toChecksumAddress(
+        exchangeAddress.exchange.id
+      );
       const subscriber = Web3.utils.toChecksumAddress(account);
 
       try {
@@ -46,7 +53,6 @@ export const Distance: FC<DistanceProps> = ({ distribution, account }) => {
         if (distribution && isMounted) {
           const receivedSoFar = calculateReceivedSoFar(
             distribution.index.indexValue,
-            distribution.totalAmountReceivedUntilUpdatedAt,
             distribution.indexValueUntilUpdatedAt,
             distribution.units || subscriptionDetail.units
           );
@@ -57,7 +63,7 @@ export const Distance: FC<DistanceProps> = ({ distribution, account }) => {
       } catch (e) {
         setIsLoading(false);
         console.error(e);
-        setError('SFError: see console for details.');
+        setError("SFError: see console for details.");
       }
     })();
 
@@ -68,7 +74,7 @@ export const Distance: FC<DistanceProps> = ({ distribution, account }) => {
 
   return (
     <div>
-      Distance Traveled So Far:{' '}
+      Distance Traveled So Far:{" "}
       {distance ? (
         <Balance balance={distance} symbol={distribution.index.token.symbol} />
       ) : isLoading ? (
